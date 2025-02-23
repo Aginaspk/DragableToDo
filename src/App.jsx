@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Column from "./Components/Column"
 import { DndContext } from '@dnd-kit/core'
+import { PlatformProvider } from "./context/PlatformContext"
 
 const COLUNMS = [
   { id: 'ToDo', title: 'To Do' },
@@ -21,25 +22,25 @@ const TASKS = [
     id: '2',
     title: "Blue Lock",
     img: "https://i.pinimg.com/736x/73/71/b8/7371b8f290a457862fc5e7b407ec4cac.jpg",
-    status: "Review"
+    status: "ToDo"
   },
   {
     id: '3',
     title: "Attack on Titan",
     img: "https://i.pinimg.com/736x/00/38/72/003872d42fa1f59cd752fbe6cb1a3ae4.jpg",
-    status: "Done"
+    status: "ToDo"
   },
   {
     id: '4',
     title: "Naruto",
     img: "",
-    status: "Done"
+    status: "ToDo"
   },
   {
     id: '5',
     title: "Bleach",
     img: "",
-    status: "InProgress"
+    status: "ToDo"
   },
   {
     id: '6',
@@ -57,22 +58,26 @@ const TASKS = [
     id: '8',
     title: "Demon Slayer",
     img: "",
-    status: "Review"
+    status: "ToDo"
   },
   {
     id: '9',
     title: "Solo Leveling",
     img: "",
-    status: "InProgress"
+    status: "ToDo"
   },
   {
     id: '10',
     title: "Black Clover",
     img: "",
-    status: "Review"
+    status: "ToDo"
   },
 
+
 ]
+
+
+
 function App() {
 
   const [tasks, setTasks] = useState(TASKS)
@@ -91,15 +96,17 @@ function App() {
 
   return (
     <>
-      <div className="p-4 ">
-        <div className="grid grid-cols-4 w-full gap-3">
-          <DndContext onDragEnd={handleDragEnd}>
-            {COLUNMS.map((item) => {
-              return <Column key={item.id} column={item} tasks={tasks.filter(task => task.status === item.id)} />
-            })}
-          </DndContext>
+      <PlatformProvider>
+        <div className="p-4 ">
+          <div className="grid grid-cols-4 w-full gap-3">
+            <DndContext onDragEnd={handleDragEnd}>
+              {COLUNMS.map((item) => {
+                return <Column key={item.id} column={item} tasks={tasks.filter(task => task.status === item.id)} />
+              })}
+            </DndContext>
+          </div>
         </div>
-      </div>
+      </PlatformProvider>
     </>
   )
 }
