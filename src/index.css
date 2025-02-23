@@ -1,0 +1,9 @@
+
+@import "tailwindcss";
+*{
+    box-sizing: border-box;
+    font-family: "Roboto Mono", serif;
+}
+body{
+    @apply bg-gray-300;
+}
